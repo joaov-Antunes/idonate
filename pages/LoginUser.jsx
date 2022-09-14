@@ -25,6 +25,17 @@ export function LoginUser({ navigation }) {
             <Text style = {{color: '#FFF', fontSize: 24}}>LOGIN</Text>
           </TouchableOpacity>
         }
+
+        <Text style = {{fontSize: 18, margin: 32}}>OU</Text>
+
+        <TouchableOpacity style = {styles.alternativeLogin}>
+          <Image source={require('../assets/fb.png')}/>
+        </TouchableOpacity>
+        
+        <TouchableOpacity style = {styles.alternativeLogin}>
+          <Image source={require('../assets/google.png')}/>
+        </TouchableOpacity>
+
       </View>
     )
 }
@@ -51,5 +62,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 18
+  },
+  alternativeLogin: {
+    marginTop: 5
   }
 })

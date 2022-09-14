@@ -14,10 +14,14 @@ export function Header({navigation}) {
     navigation.navigate('profile')
   }
 
+  function openSignUp() {
+    navigation.navigate('signUp')
+  }
+
   return (
     <View style = {styles.header}>
     {isLogged ?(
-      <TouchableOpacity onPress={openLoginScreen}>
+      <TouchableOpacity onPress={openSignUp}>
         <Image source={require('../assets/user.png')}></Image>
       </TouchableOpacity>
     ): 

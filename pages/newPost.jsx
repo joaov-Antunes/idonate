@@ -7,8 +7,27 @@ import {PlayfairDisplay_400Regular,
 from '@expo-google-fonts/playfair-display';
 import {useFonts} from 'expo-font';
 import { Footer } from "../templates/footer";
+import * as ImagePicker from 'expo-image-picker'
+import { useState } from "react";
 
 export function NewPost(props) {
+    const [image, setImage] = useState(null);
+    
+    const pickImage = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            allowsEditing: true,
+            aspect: [4, 3],
+            quality: 1,
+        });
+
+        console.log(result);
+
+        if (!result.cancelled) {
+            setImage(result.uri)
+        }
+    }
+
     let [fontsLoaded] = useFonts({
         Montserrat_400Regular,
         PlayfairDisplay_400Regular,
@@ -27,7 +46,13 @@ export function NewPost(props) {
         <View style = {styles.container}>
             <View style = {styles.header}>
                 <Text style = {styles.title}>Novo post</Text>
-                <Text style = {styles.subtitle}>Selecione fotos da galeria</Text>
+            </View>
+
+            <View style = {styles.imageContainer}>
+                <TouchableOpacity onPress={pickImage} style = {styles.selectImage}>
+                    <Text style = {styles.subtitle}>Selecionar imagem da galeria</Text>
+                </TouchableOpacity>
+                {image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
             </View>
             <Footer navigation = {props.navigation}/>
         </View>
@@ -48,11 +73,22 @@ const styles = StyleSheet.create({
         fontSize: 24,
         textAlign: 'center',
     },
-     subtitle: {
+    subtitle: {
         fontSize: 18,
         fontFamily: 'Montserrat_400Regular',
         fontWeight: 'bold',
-        textAlign: 'center',
-        margin: 32
-     }
+        color: '#FFF'
+    },
+    imageContainer: {
+        alignSelf: 'center'
+    },
+    selectImage: {
+        width: 316,
+        backgroundColor: '#0D6380',
+        marginTop: 64,
+        height: 56,
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 10,
+    }
 })

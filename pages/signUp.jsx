@@ -1,13 +1,13 @@
 import { View, Image, Text, StyleSheet, TouchableOpacity } from "react-native";
 
-export function Login({ navigation }) {
+export function SignUp({ navigation }) {
 
-        function openLoginUser() {
-            navigation.navigate('loginUser')
+        function openChooseSignUp() {
+            navigation.navigate('chooseSignUp')
         }
 
-        function openLoginOng() {
-            navigation.navigate('loginOng')
+        function openLogin() {
+            navigation.navigate('login')
         }
 
         return (
@@ -16,14 +16,14 @@ export function Login({ navigation }) {
                 <Text style = {styles.title}>Idonate</Text>
 
                 <View style = {styles.component}>
-                    <TouchableOpacity style = {styles.donate} onPress = {openLoginUser}>
-                        <Text style = {{fontSize: 24}}>Doador</Text>
+                    <TouchableOpacity style = {styles.donate} onPress = {openChooseSignUp}>
+                        <Text style = {{fontSize: 24}}>Cadastro</Text>
                     </TouchableOpacity>
                 </View>
                 
                 <View style = {styles.component}>
-                    <TouchableOpacity style = {styles.ong} onPress = {openLoginOng}>
-                        <Text style = {{color: '#fff', fontSize: 24}}>ONG</Text>
+                    <TouchableOpacity style = {styles.ong} onPress = {openLogin}>
+                        <Text style = {{color: '#fff', fontSize: 24}}>Login</Text>
                     </TouchableOpacity>
                 </View>
         </View>
@@ -63,4 +63,4 @@ const styles = StyleSheet.create({
     component: {
         marginTop: 17
     }
-});
+})

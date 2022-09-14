@@ -2,7 +2,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 const { Screen, Navigator } = createNativeStackNavigator()
 
-import { Home, Login, LoginOng, LoginUser, Profile, VerifyLogin, Search, NewPost} from '../pages'
+import { Home, Login, LoginOng, LoginUser, Profile, VerifyLogin, Search, NewPost, SignUp, SignUpOng, ChooseSignUp} from '../pages'
 
 export function AppRoutes() {
     return (
@@ -64,11 +64,35 @@ export function AppRoutes() {
             />
 
             <Screen
-            name='newpost'
-            options = {{
-                headerShown: false
-            }}
-            component = {NewPost}
+                name='newpost'
+                options = {{
+                    headerShown: false
+                }}
+                component = {NewPost}
+            />
+
+            <Screen
+                name='signUp'
+                options = {{
+                    headerShown: false
+                }}
+                component = {SignUp}
+            />
+
+            <Screen
+                name='signUpOng'
+                options = {{
+                    headerShown: false
+                }}
+                component = {SignUpOng}
+            />
+
+            <Screen
+                name='chooseSignUp'
+                options = {{
+                    headerShown: false
+                }}
+                component = {ChooseSignUp}
             />
 
         </Navigator>

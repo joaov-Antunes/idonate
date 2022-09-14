@@ -1,13 +1,13 @@
 import { View, Image, Text, StyleSheet, TouchableOpacity } from "react-native";
 
-export function Login({ navigation }) {
+export function ChooseSignUp({ navigation }) {
 
         function openLoginUser() {
             navigation.navigate('loginUser')
         }
 
-        function openLoginOng() {
-            navigation.navigate('loginOng')
+        function openSignUpOng() {
+            navigation.navigate('signUpOng')
         }
 
         return (
@@ -22,7 +22,7 @@ export function Login({ navigation }) {
                 </View>
                 
                 <View style = {styles.component}>
-                    <TouchableOpacity style = {styles.ong} onPress = {openLoginOng}>
+                    <TouchableOpacity style = {styles.ong} onPress = {openSignUpOng}>
                         <Text style = {{color: '#fff', fontSize: 24}}>ONG</Text>
                     </TouchableOpacity>
                 </View>
@@ -63,4 +63,4 @@ const styles = StyleSheet.create({
     component: {
         marginTop: 17
     }
-});
+})
