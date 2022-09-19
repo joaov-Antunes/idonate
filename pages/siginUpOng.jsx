@@ -3,30 +3,29 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 export function SignUpOng({ navigation }) {
   let isLogged = true
+
+  function openNextPage() {
+    navigation.navigate('signUpContinuation')
+  }
   return (
       <View style = {styles.container}>
         <Image source={require('../assets/logo.png')}></Image>
+        
         <Text style = {{alignSelf: 'flex-start', marginLeft: 40, marginTop: 18, marginBottom: -20 }}>NOME COMPLETO</Text>
         <TextInput style = {styles.input}/>
+        
         <Text style = {{alignSelf: 'flex-start', marginLeft: 40, marginTop: 18, marginBottom: -20}}>CPF</Text>
         <TextInput style = {styles.input}/>
+        
         <Text style = {{alignSelf: 'flex-start', marginLeft: 40, marginTop: 18, marginBottom: -20}}>EMAIL</Text>
         <TextInput style = {styles.input}/>
+        
         <Text style = {{alignSelf: 'flex-start', marginLeft: 40, marginTop: 18, marginBottom: -20}}>NOME DA ONG</Text>
         <TextInput style = {styles.input}/>
-        <Text style = {{alignSelf: 'flex-start', marginLeft: 40, marginTop: 18, marginBottom: -20}}>SENHA</Text>
-        <TextInput style = {styles.input}/>
-        <Text style = {{alignSelf: 'flex-start', marginLeft: 40, marginTop: 18, marginBottom: -20}}>CONFIRMAR SENHA</Text>
-        <TextInput style = {styles.input}/>
-        <Text style = {{alignSelf: 'flex-start', marginLeft: 40, marginTop: 18, marginBottom: -20}}>CNDT</Text>
-        <TextInput style = {styles.input}/>
-        <Text style = {{alignSelf: 'flex-start', marginLeft: 40, marginTop: 18, marginBottom: -20}}>CELULAR</Text>
-        <TextInput style = {styles.input}/>
-        
 
-          <TouchableOpacity style = {styles.login}>
-            <Text style = {{color: '#FFF', fontSize: 24}}>ENVIAR</Text>
-          </TouchableOpacity>
+        <TouchableOpacity style = {styles.login} onPress = {openNextPage}>
+          <Text style = {{color: '#FFF', fontSize: 24}}>PRÓXIMO</Text>
+        </TouchableOpacity>
 
       </View>
     )

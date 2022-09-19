@@ -15,6 +15,10 @@ export function Footer({ navigation }) {
     navigation.navigate('newpost')
   }
 
+  function openPayment() {
+    navigation.navigate('payment')
+  }
+
     return (
         <View style = {styles.footer}>
           <TouchableOpacity onPress={openHome}>
@@ -25,7 +29,7 @@ export function Footer({ navigation }) {
             <Ionicons style = {styles.footerIcon} name="search-outline" size={35} color="black" />
           </TouchableOpacity>
 
-          <TouchableOpacity>
+          <TouchableOpacity onPress={openPayment}>
             <Image style = {styles.footerLogo} source={require('../assets/logo.png')}></Image>
           </TouchableOpacity>
           

@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
       borderTopWidth: 1,
       alignItems: 'center',
       justifyContent: 'center',
-      paddingLeft: 31
+      paddingLeft: 38
     }, 
     footerIcon: {
       marginRight: 31

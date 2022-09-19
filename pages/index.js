@@ -10,5 +10,21 @@ import {NewPost} from './newPost';
 import { SignUp } from "./signUp";
 import { SignUpOng } from "./siginUpOng";
 import { ChooseSignUp } from "./chooseSignUp";
+import { SignUpOngPartTwo } from "./signUpContinuation";
+import { Payment } from "./payment";
 
-export {Home, Login, LoginOng, LoginUser, Profile, RegisterOng, VerifyLogin, Search, NewPost, SignUp, SignUpOng, ChooseSignUp}
+export { Home, 
+        Login, 
+        LoginOng, 
+        LoginUser, 
+        Profile, 
+        RegisterOng, 
+        VerifyLogin, 
+        Search, 
+        NewPost, 
+        SignUp, 
+        SignUpOng, 
+        ChooseSignUp, 
+        SignUpOngPartTwo,
+        Payment
+    }
