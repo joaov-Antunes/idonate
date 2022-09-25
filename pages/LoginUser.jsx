@@ -1,30 +1,45 @@
+import { useState } from "react";
 import { View, Image, Text, StyleSheet, TouchableOpacity, TextInput } from "react-native";
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 
 export function LoginUser({ navigation }) {
-  function openProfile() {
-    navigation.navigate('profile')
+  let [display, setDisplay] = useState('none')
+  let [user, setUser] = useState(null);
+  let [password, setPassword] = useState(null)
+  let [login, setLogin] = useState(null)
+
+  async function sendLogin() {
+    let response = await fetch('http://192.168.0.190:3000/login', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        email: user,
+        password: password
+      })
+    });
+    let json = await response.json();
+    if(json == 'error') {
+      setDisplay('flex'); 
+    } else {
+      navigation.navigate('profile');
+    }
   }
 
-  let isLogged = true
   return (
       <View style = {styles.container}>
         <Image source={require('../assets/logo.png')}></Image>
         <Text style = {{alignSelf: 'flex-start', marginLeft: 40, marginTop: 18, marginBottom: -20 }}>EMAIL</Text>
-        <TextInput style = {styles.input}/>
+        <TextInput style = {styles.input} onChangeText = {text => setUser(text)}/>
         <Text style = {{alignSelf: 'flex-start', marginLeft: 40, marginTop: 18, marginBottom: -20}}>SENHA</Text>
-        <TextInput style = {styles.input}/>
+        <TextInput style = {styles.input} onChangeText = {text => setPassword(text)} secureTextEntry = {true}/>
 
-        {isLogged ?(
-          <TouchableOpacity style = {styles.login} onPress = {openProfile}>
-            <Text style = {{color: '#FFF', fontSize: 24}}>LOGIN</Text>
-          </TouchableOpacity>
-        ):  
-          <TouchableOpacity style = {styles.login}>
-            <Text style = {{color: '#FFF', fontSize: 24}}>LOGIN</Text>
-          </TouchableOpacity>
-        }
+        <TouchableOpacity style = {styles.login} onPress = {sendLogin}>
+          <Text style = {{color: '#FFF', fontSize: 24}}>LOGIN</Text>
+        </TouchableOpacity> 
 
         <Text style = {{fontSize: 18, margin: 32}}>OU</Text>
 

@@ -1,13 +1,15 @@
-import { Text, View, Image, ScrollView, TouchableOpacity, Modal, Button} from 'react-native';
+import { Alert, Text, View, Image, TouchableOpacity, Modal} from 'react-native';
 import styles from '../styles/styles';
 import { Ionicons } from '@expo/vector-icons'
+import { useState } from 'react';
 
 export function Header({navigation}) {
+  const [modalVisible, setModalVisible] = useState(false);
 
-  let isLogged = true
+  let isLogged = true;
 
   function openLoginScreen() {
-    navigation.navigate('login')
+    navigation.navigate('login');
   }
 
   function openProfileScreen() {
@@ -20,6 +22,30 @@ export function Header({navigation}) {
 
   return (
     <View style = {styles.header}>
+      <Modal
+        animationType="fade"
+        transparent={true}
+        visible={modalVisible}
+      >
+        <View style = {styles.modalContainer}>
+          <View>
+            <View>
+              <Image source={require('../assets/logo.png')}/>
+              <View style = {styles.modalHeader}>
+                
+              </View>
+              <Text style={styles.modalText}>Querido usuário, nosso app não tem fins lucrativos, e por isso, sua ajuda seria bem vinda para ajudar a manter nosso app! Caso você goste do nosso app, nós da equipe Idonate pedimos sua ajuda com uma pequena doação para arcarmos com os custos do nosso app.</Text>
+              <TouchableOpacity
+                style={[styles.button, styles.buttonClose]}
+                onPress={() => setModalVisible(!modalVisible)}
+              >
+                <Text style={styles.textStyle}>Hide Modal</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+      </Modal>
+
     {isLogged ?(
       <TouchableOpacity onPress={openSignUp}>
         <Image source={require('../assets/user.png')}></Image>
@@ -30,12 +56,10 @@ export function Header({navigation}) {
       </TouchableOpacity>
     }
         
-
-        
-        <Text style = {styles.title}>Idonate</Text>
-        <TouchableOpacity>
-          <Ionicons name="settings-outline" size={30} color="black" />
-        </TouchableOpacity>
+      <Text style = {styles.title}>Idonate</Text>
+      <TouchableOpacity onPress={() => setModalVisible(true)}>
+        <Ionicons name="settings-outline" size={30} color="black" />
+      </TouchableOpacity>
         
       </View>
   )

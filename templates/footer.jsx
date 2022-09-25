@@ -19,6 +19,10 @@ export function Footer({ navigation }) {
     navigation.navigate('payment')
   }
 
+  function openHistory() {
+    navigation.navigate('history')
+  }
+
     return (
         <View style = {styles.footer}>
           <TouchableOpacity onPress={openHome}>
@@ -37,7 +41,7 @@ export function Footer({ navigation }) {
             <Feather style = {styles.footerIcon} name="plus-square" size={35} color="black" />
           </TouchableOpacity>
           
-          <TouchableOpacity>
+          <TouchableOpacity onPress = {openHistory}>
             <MaterialIcons style = {styles.footerIcon} name="history" size={35} color="black" />
           </TouchableOpacity>
         </View>

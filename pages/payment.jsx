@@ -1,33 +1,22 @@
 import { View, TouchableOpacity, TextInput, Text, Image, StyleSheet } from "react-native";
-import { useState } from "react"
 import { Pix } from "./pix";
-import { Card } from "./card";
 
-export function Payment() {    
-    let [paymentMode, setPaymentMode] = useState(<Pix/>)
+export function Payment({ navigation }) {    
+    
+    function selectCard() {
+        navigation.navigate('pix')
+    }
 
     return (
         <View style = {styles.container}>
 
             <View style = {{flexDirection: 'row', justifyContent: 'center', marginLeft: -22}}>
-                <TouchableOpacity style = {styles.button}>
+                <TouchableOpacity style = {styles.button} onPress = {openCard}>
                     <Text style = {styles.buttonText}>Cartão</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity style = {styles.button}>
+                <TouchableOpacity style = {styles.button} onPress = {selectCard}>
                     <Text style = {styles.buttonText}>PIX</Text>
-                </TouchableOpacity>
-            </View>
-
-            <Text style = {styles.title}>Escaneie para fazer o pagamento</Text>
-            <Image source={require('../assets/qr.png')} style = {{alignSelf: 'center', marginTop: 36 }}/>
-
-            <Text style = {{marginTop: 50, textAlign: 'center', fontSize: 18}}>OU</Text>
-            <Text style = {styles.title}>Copie e cole no aplicativo do seu banco</Text>
-            <View style = {styles.bottomPage}>
-                <Text style = {styles.pixKey}>Chave pix:</Text>
-                <TouchableOpacity style = {styles.pixKeyNumber}>
-                    <Text>11989289800</Text>
                 </TouchableOpacity>
             </View>
         </View>

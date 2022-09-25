@@ -2,7 +2,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 const { Screen, Navigator } = createNativeStackNavigator()
 
-import { Home, Login, LoginOng, LoginUser, Profile, VerifyLogin, Search, NewPost, SignUp, SignUpOng, ChooseSignUp, SignUpOngPartTwo, Payment} from '../pages'
+import { Home, Login, LoginOng, LoginUser, Profile, VerifyLogin, Search, NewPost, SignUp, SignUpOng, ChooseSignUp, SignUpOngPartTwo, Payment, Pix, History} from '../pages'
 
 export function AppRoutes() {
     return (
@@ -109,6 +109,22 @@ export function AppRoutes() {
                     headerShown: false
                 }}
                 component = {Payment}
+            />
+
+            <Screen
+                name='pix'
+                options = {{
+                    headerShown: false
+                }}
+                component = {Pix}
+            />
+
+            <Screen
+                name='history'
+                options = {{
+                    headerShown: false
+                }}
+                component = {History}
             />
         </Navigator>
     )

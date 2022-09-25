@@ -6,12 +6,14 @@ import { Profile } from "./profile";
 import { RegisterOng } from "./SignInOng";
 import { VerifyLogin } from './verify';
 import { Search } from "./search";
-import {NewPost} from './newPost';
+import { NewPost } from './newPost';
 import { SignUp } from "./signUp";
 import { SignUpOng } from "./siginUpOng";
 import { ChooseSignUp } from "./chooseSignUp";
 import { SignUpOngPartTwo } from "./signUpContinuation";
 import { Payment } from "./payment";
+import { Pix } from "./pix";
+import { History } from "./history";
 
 export { Home, 
         Login, 
@@ -26,5 +28,7 @@ export { Home,
         SignUpOng, 
         ChooseSignUp, 
         SignUpOngPartTwo,
-        Payment
+        Payment,
+        Pix,
+        History
     }

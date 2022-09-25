@@ -70,6 +70,11 @@ const styles = StyleSheet.create({
     footerLogo: {
       marginBottom: 50,
       marginRight: 31
+    },
+    modalContainer: {
+      backgroundColor: 'FCFEFF',
+      width: '60%',
+      alignItems: 'center'
     }
   });
   
