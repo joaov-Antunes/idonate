@@ -26,7 +26,7 @@ const Cliente = bd.define('Cliente', {
     },
     age: {
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: true
     },
     cellphoneNumber: {
         type: DataTypes.STRING,

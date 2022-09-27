@@ -2,8 +2,8 @@ import { Text, View, Image, ScrollView, TouchableOpacity, StyleSheet, Linking} f
 import { Montserrat_400Regular } from '@expo-google-fonts/montserrat';
 import {PlayfairDisplay_400Regular, PlayfairDisplay_700Bold, PlayfairDisplay_600SemiBold, PlayfairDisplay_400Regular_Italic} from '@expo-google-fonts/playfair-display';
 import {useFonts} from 'expo-font';
-import { Ionicons, Feather, MaterialIcons } from '@expo/vector-icons';
 import { Footer } from '../templates/footer'
+import { useState } from 'react';
 
 export function Profile(props) {
     let [fontsLoaded] = useFonts({

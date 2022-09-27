@@ -3,6 +3,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const bd = require('./database/bd');
 const { Client, Ong } = require('./models');
+const { QueryTypes } = require('sequelize');
 
 const app = express();
 app.use(cors());
@@ -16,12 +17,35 @@ app.post('/login', async (req, res) => {
     if(response == null) {
         res.send(JSON.stringify('error'));
     } else {
-        res.send(response)
+        res.send(response);
     }
 });
 
+app.post('/register', async(req, res) => {
+    let create = await Client.create({
+        name: req.body.name,
+        cpf: req.body.cpf,
+        email: req.body.email,
+        password: req.body.password,
+        cellphoneNumber: req.body.number,
+        userName: req.body.username
+    });
+    if(create == null) {
+        res.send(JSON.stringify('error'));
+    } else {
+        res.send(create);
+    }
+});
+
+app.get('/login/:id', async(req, res) => {
+    const users = await bd.query(
+        `SELECT * FROM clients WHERE email = ${req.body.email}`, 
+        { type: QueryTypes.SELECT }
+    );
+})
+
 app.get ('/', (req, res) => {
-    res.send('Meu servidor backend já está rodando.')
+    res.send('Meu servidor backend já está rodando.');
 });
 
 app.get('/create', async(req, res) => {
@@ -49,18 +73,18 @@ async function bdConnect() {
 };
 
 // async function syncModels() {
-//     await Client.sync()
+//     await Client.sync({ force: true })
 // }
 
 // if(bdConnect) {
-//     syncModels({ alter: true }).
+//     syncModels().
 //     then(() => {
 //         console.log('Modelo sincronizado com sucesso!');
 //     }).
 //     catch((error) => {
 //         console.error(error);
 //     });
-// };
+// }
 
 let port = process.env.PORT || 3000;
 app.listen(port, (req, res) => {

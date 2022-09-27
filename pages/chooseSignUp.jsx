@@ -2,8 +2,8 @@ import { View, Image, Text, StyleSheet, TouchableOpacity } from "react-native";
 
 export function ChooseSignUp({ navigation }) {
 
-        function openLoginUser() {
-            navigation.navigate('loginUser')
+        function openSignUpUser() {
+            navigation.navigate('signupUser')
         }
 
         function openSignUpOng() {
@@ -16,7 +16,7 @@ export function ChooseSignUp({ navigation }) {
                 <Text style = {styles.title}>Idonate</Text>
 
                 <View style = {styles.component}>
-                    <TouchableOpacity style = {styles.donate} onPress = {openLoginUser}>
+                    <TouchableOpacity style = {styles.donate} onPress = {openSignUpUser}>
                         <Text style = {{fontSize: 24}}>Doador</Text>
                     </TouchableOpacity>
                 </View>

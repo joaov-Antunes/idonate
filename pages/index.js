@@ -11,6 +11,7 @@ import { SignUp } from "./signUp";
 import { SignUpOng } from "./siginUpOng";
 import { ChooseSignUp } from "./chooseSignUp";
 import { SignUpOngPartTwo } from "./signUpContinuation";
+import { SignUpUser } from "./signUpUser";
 import { Payment } from "./payment";
 import { Pix } from "./pix";
 import { History } from "./history";
@@ -30,5 +31,6 @@ export { Home,
         SignUpOngPartTwo,
         Payment,
         Pix,
-        History
+        History,
+        SignUpUser
     }

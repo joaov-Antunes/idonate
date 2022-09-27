@@ -75,6 +75,13 @@ const styles = StyleSheet.create({
       backgroundColor: 'FCFEFF',
       width: '60%',
       alignItems: 'center'
+    },
+    button: {
+      backgroundColor: "#0D6380",
+      borderRadius: 10,
+      height: 56,
+      alignItems: 'center',
+       justifyContent: 'center',
     }
   });
   

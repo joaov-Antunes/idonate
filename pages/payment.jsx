@@ -11,7 +11,7 @@ export function Payment({ navigation }) {
         <View style = {styles.container}>
 
             <View style = {{flexDirection: 'row', justifyContent: 'center', marginLeft: -22}}>
-                <TouchableOpacity style = {styles.button} onPress = {openCard}>
+                <TouchableOpacity style = {styles.button}>
                     <Text style = {styles.buttonText}>Cartão</Text>
                 </TouchableOpacity>
 

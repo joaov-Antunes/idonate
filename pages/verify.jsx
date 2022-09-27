@@ -1,6 +1,13 @@
 import { View, Image, Text, StyleSheet, TouchableOpacity, TextInput } from "react-native";
 
 export function VerifyLogin() {
+
+  async function verify() {
+    let response = await fetch('http://192.168.0.190:3000/verify', {
+      
+    })
+  }
+
   return (
     <View style = {styles.container}>
       <Image source={require('../assets/logo.png')} style = {{marginBottom: 22}}></Image>
@@ -31,7 +38,7 @@ export function VerifyLogin() {
         >
         </TextInput>
       </View>
-      <TouchableOpacity style = {styles.login}>
+      <TouchableOpacity style = {styles.login} onPress = {verify}>
         <Text style = {{fontSize: 24, color: '#fff'}}>Enviar</Text>
       </TouchableOpacity>
 

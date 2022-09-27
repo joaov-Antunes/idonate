@@ -1,13 +1,12 @@
 import { useState } from "react";
 import { View, Image, Text, StyleSheet, TouchableOpacity, TextInput } from "react-native";
-import Icon from 'react-native-vector-icons/FontAwesome';
-
 
 export function LoginUser({ navigation }) {
   let [display, setDisplay] = useState('none')
   let [user, setUser] = useState(null);
-  let [password, setPassword] = useState(null)
-  let [login, setLogin] = useState(null)
+  let [password, setPassword] = useState(null);
+  let [username, setUsername] = useState(null);
+  var [login, setLogin] = useState(false);
 
   async function sendLogin() {
     let response = await fetch('http://192.168.0.190:3000/login', {
@@ -18,20 +17,26 @@ export function LoginUser({ navigation }) {
       },
       body: JSON.stringify({
         email: user,
-        password: password
+        password: password,
+        username: username
       })
     });
     let json = await response.json();
     if(json == 'error') {
-      setDisplay('flex'); 
+      setDisplay('flex');
+      setTimeout(() => {
+        setDisplay('none')
+      }, 10000)
     } else {
-      navigation.navigate('profile');
+      navigation.navigate('home');
+      setLogin(true);
     }
   }
 
   return (
       <View style = {styles.container}>
         <Image source={require('../assets/logo.png')}></Image>
+        <Text style = {{display: display, color: 'red', fontSize: 18, margin: 20}}>Usuário ou senha inválidos.</Text>
         <Text style = {{alignSelf: 'flex-start', marginLeft: 40, marginTop: 18, marginBottom: -20 }}>EMAIL</Text>
         <TextInput style = {styles.input} onChangeText = {text => setUser(text)}/>
         <Text style = {{alignSelf: 'flex-start', marginLeft: 40, marginTop: 18, marginBottom: -20}}>SENHA</Text>

@@ -4,14 +4,9 @@ import { Ionicons } from '@expo/vector-icons'
 import { useState } from 'react';
 
 export function Header({navigation}) {
-  const [modalVisible, setModalVisible] = useState(false);
-
-  let isLogged = true;
-
-  function openLoginScreen() {
-    navigation.navigate('login');
-  }
-
+  let [modalVisible, setModalVisible] = useState(false);
+  let [logged, setLogged] = useState(false)
+  
   function openProfileScreen() {
     navigation.navigate('profile')
   }
@@ -39,14 +34,14 @@ export function Header({navigation}) {
                 style={[styles.button, styles.buttonClose]}
                 onPress={() => setModalVisible(!modalVisible)}
               >
-                <Text style={styles.textStyle}>Hide Modal</Text>
+              <Text style={styles.textStyle}>Hide Modal</Text>
               </TouchableOpacity>
             </View>
           </View>
         </View>
       </Modal>
 
-    {isLogged ?(
+    {logged == false ?(
       <TouchableOpacity onPress={openSignUp}>
         <Image source={require('../assets/user.png')}></Image>
       </TouchableOpacity>
@@ -64,4 +59,3 @@ export function Header({navigation}) {
       </View>
   )
 }
-
