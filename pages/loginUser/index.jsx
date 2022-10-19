@@ -1,15 +1,18 @@
-import { useState } from "react";
-import { View, Image, Text, StyleSheet, TouchableOpacity, TextInput } from "react-native";
+import { useEffect, useState } from "react";
+import { View, Image, Text, StyleSheet, TouchableOpacity, TextInput, Alert } from "react-native";
+import * as Facebook from 'expo-facebook';
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 
 export function LoginUser({ navigation }) {
-  let [display, setDisplay] = useState('none')
-  let [user, setUser] = useState(null);
-  let [password, setPassword] = useState(null);
-  let [username, setUsername] = useState(null);
-  var [login, setLogin] = useState(false);
+  const [display, setDisplay] = useState('none')
+  const [user, setUser] = useState(null);
+  const [password, setPassword] = useState(null);
+  const [username, setUsername] = useState(null);
+  const [login, setLogin] = useState(false);
 
   async function sendLogin() {
-    let response = await fetch('http://192.168.0.190:3000/login', {
+    let response = await fetch('http:/192.168.0.190:3000/login', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -28,14 +31,19 @@ export function LoginUser({ navigation }) {
         setDisplay('none')
       }, 10000)
     } else {
-      navigation.navigate('home');
+      navigation.navigate('profile');
       setLogin(true);
+
+      const userJsonValue = JSON.stringify(json);
+      await AsyncStorage.setItem('userData', userJsonValue);
+      let resData = await AsyncStorage.getItem('userData');
+      console.log(JSON.parse(resData));
     }
   }
 
   return (
       <View style = {styles.container}>
-        <Image source={require('../assets/logo.png')}></Image>
+        <Image source={require('../../assets/logo.png')}></Image>
         <Text style = {{display: display, color: 'red', fontSize: 18, margin: 20}}>Usuário ou senha inválidos.</Text>
         <Text style = {{alignSelf: 'flex-start', marginLeft: 40, marginTop: 18, marginBottom: -20 }}>EMAIL</Text>
         <TextInput style = {styles.input} onChangeText = {text => setUser(text)}/>
@@ -49,11 +57,11 @@ export function LoginUser({ navigation }) {
         <Text style = {{fontSize: 18, margin: 32}}>OU</Text>
 
         <TouchableOpacity style = {styles.alternativeLogin}>
-          <Image source={require('../assets/fb.png')}/>
+          <Image source={require('../../assets/fb.png')}/>
         </TouchableOpacity>
         
         <TouchableOpacity style = {styles.alternativeLogin}>
-          <Image source={require('../assets/google.png')}/>
+          <Image source={require('../../assets/google.png')}/>
         </TouchableOpacity>
 
       </View>

@@ -1,8 +1,8 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-const { Screen, Navigator } = createNativeStackNavigator()
+const { Screen, Navigator } = createNativeStackNavigator();
 
-import { Home, Login, LoginOng, LoginUser, Profile, VerifyLogin, Search, NewPost, SignUp, SignUpOng, ChooseSignUp, SignUpOngPartTwo, Payment, Pix, History, SignUpUser} from '../pages'
+import { Home, Login, LoginOng, LoginUser, Profile, VerifyLogin, Search, NewPost, SignUp, SignUpOng, ChooseSignUp, SignUpOngPartTwo, Payment, Pix, History, SignUpUser, Config, Card, Appearance, Ong, FinishPost} from '../pages'
 
 export function AppRoutes() {
     return (
@@ -13,6 +13,14 @@ export function AppRoutes() {
                     headerShown: false
                 }}
                 component = {Home}
+            />
+
+            <Screen
+                name='profile'
+                options = {{
+                    headerShown: false
+                }}
+                component = {Profile}
             />
 
             <Screen
@@ -37,14 +45,6 @@ export function AppRoutes() {
                     headerShown: false
                 }}
                 component = {LoginOng}
-            />
-
-            <Screen
-                name='profile'
-                options = {{
-                    headerShown: false
-                }}
-                component = {Profile}
             />
 
             <Screen
@@ -80,19 +80,20 @@ export function AppRoutes() {
             />
 
             <Screen
-                name='signUpOng'
-                options = {{
-                    headerShown: false
-                }}
-                component = {SignUpOng}
-            />
-
-            <Screen
                 name='chooseSignUp'
                 options = {{
                     headerShown: false
                 }}
                 component = {ChooseSignUp}
+            />
+
+
+            <Screen
+                name='signUpOng'
+                options = {{
+                    headerShown: false
+                }}
+                component = {SignUpOng}
             />
 
             <Screen
@@ -133,6 +134,46 @@ export function AppRoutes() {
                     headerShown: false
                 }}
                 component = {SignUpUser}
+            />
+
+            <Screen
+                name='config'
+                options = {{
+                    headerShown: false
+                }}
+                component = {Config}
+            />
+
+            <Screen
+                name='card'
+                options = {{
+                    headerShown: false
+                }}
+                component = {Card}
+            />
+
+            <Screen
+                name='view'
+                options = {{
+                    headerShown: false
+                }}
+                component = {Appearance}
+            />
+
+            <Screen
+                name='ong'
+                options = {{
+                    headerShown: false
+                }}
+                component = {Ong}
+            />
+
+            <Screen
+                name='finish'
+                options = {{
+                    headerShown: true
+                }}
+                component = {FinishPost}
             />
         </Navigator>
     )

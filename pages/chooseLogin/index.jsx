@@ -1,28 +1,28 @@
 import { View, Image, Text, StyleSheet, TouchableOpacity } from "react-native";
 
-export function ChooseSignUp({ navigation }) {
+export function Login({ navigation }) {
 
-        function openSignUpUser() {
-            navigation.navigate('signupUser')
+        function openLoginUser() {
+            navigation.navigate('loginUser')
         }
 
-        function openSignUpOng() {
-            navigation.navigate('signUpOng')
+        function openLoginOng() {
+            navigation.navigate('loginOng')
         }
 
         return (
             <View style={styles.container}>
-                <Image source={require('../assets/logo.png')}></Image>
+                <Image source={require('../../assets/logo.png')}></Image>
                 <Text style = {styles.title}>Idonate</Text>
 
                 <View style = {styles.component}>
-                    <TouchableOpacity style = {styles.donate} onPress = {openSignUpUser}>
+                    <TouchableOpacity style = {styles.donate} onPress = {openLoginUser}>
                         <Text style = {{fontSize: 24}}>Doador</Text>
                     </TouchableOpacity>
                 </View>
                 
                 <View style = {styles.component}>
-                    <TouchableOpacity style = {styles.ong} onPress = {openSignUpOng}>
+                    <TouchableOpacity style = {styles.ong} onPress = {openLoginOng}>
                         <Text style = {{color: '#fff', fontSize: 24}}>ONG</Text>
                     </TouchableOpacity>
                 </View>
@@ -63,4 +63,4 @@ const styles = StyleSheet.create({
     component: {
         marginTop: 17
     }
-})
+});

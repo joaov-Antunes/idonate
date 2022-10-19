@@ -2,26 +2,26 @@ import { View, TouchableOpacity, Text, Image, StyleSheet } from "react-native";
 import { useState } from "react";
 
 export function History() {
-    let [clean, setClean] = useState(true)
+    let [clean, setClean] = useState(true);
     
     return(
         <View style = {styles.container}>
             <Text style = {styles.title}>Perfis acessados recentemente</Text>
             <View style = {styles.profiles}>
                 <TouchableOpacity style = {styles.profileContainer}>
-                    <Image source={require('../assets/user.png')} style = {{left: 10}}/>
+                    <Image source={require('../../assets/user.png')} style = {{left: 10}}/>
                     <Text style = {styles.ongName}>Nome da ong</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style = {styles.profileContainer}>
-                    <Image source={require('../assets/user.png')} style = {{left: 10}}/>
+                    <Image source={require('../../assets/user.png')} style = {{left: 10}}/>
                     <Text style = {styles.ongName}>Nome da ong</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style = {styles.profileContainer}>
-                    <Image source={require('../assets/user.png')} style = {{left: 10}}/>
+                    <Image source={require('../../assets/user.png')} style = {{left: 10}}/>
                     <Text style = {styles.ongName}>Nome da ong</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style = {styles.profileContainer}>
-                    <Image source={require('../assets/user.png')} style = {{left: 10}}/>
+                    <Image source={require('../../assets/user.png')} style = {{left: 10}}/>
                     <Text style = {styles.ongName}>Nome da ong</Text>
                 </TouchableOpacity>
             </View>
@@ -77,4 +77,4 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center'
     }
-})
+});

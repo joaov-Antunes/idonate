@@ -12,7 +12,7 @@ export function SignUp({ navigation }) {
 
         return (
             <View style={styles.container}>
-                <Image source={require('../assets/logo.png')}></Image>
+                <Image source={require('../../assets/logo.png')}></Image>
                 <Text style = {styles.title}>Idonate</Text>
 
                 <View style = {styles.component}>

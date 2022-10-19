@@ -1,61 +1,52 @@
-import { Alert, Text, View, Image, TouchableOpacity, Modal} from 'react-native';
+import { Text, View, Image, TouchableOpacity, Modal} from 'react-native';
 import styles from '../styles/styles';
 import { Ionicons } from '@expo/vector-icons'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export function Header({navigation}) {
   let [modalVisible, setModalVisible] = useState(false);
-  let [logged, setLogged] = useState(false)
-  
-  function openProfileScreen() {
-    navigation.navigate('profile')
-  }
+  let [logged, setLogged] = useState(false);
+  let [user, setUser] = useState(null);
 
-  function openSignUp() {
-    navigation.navigate('signUp')
-  }
+  async function setName() {
+    let response = await AsyncStorage.getItem('userData');
+    let json = JSON.parse(response);
+    try {
+      setUser(json.name);
+      if(user == null) {
+        setLogged(false);
+      } else {
+        setLogged(true);
+      }
+    } catch (error) {
+      //console.log(error);
+    };
+  };
+
+  async function getUserData() {
+    let response = await AsyncStorage.getItem('userData');
+    let json = JSON.parse(response);
+  };
+
+  setName();
+
+  useEffect(() => {
+    getUserData();
+  }, []);
 
   return (
     <View style = {styles.header}>
-      <Modal
-        animationType="fade"
-        transparent={true}
-        visible={modalVisible}
-      >
-        <View style = {styles.modalContainer}>
-          <View>
-            <View>
-              <Image source={require('../assets/logo.png')}/>
-              <View style = {styles.modalHeader}>
-                
-              </View>
-              <Text style={styles.modalText}>Querido usuário, nosso app não tem fins lucrativos, e por isso, sua ajuda seria bem vinda para ajudar a manter nosso app! Caso você goste do nosso app, nós da equipe Idonate pedimos sua ajuda com uma pequena doação para arcarmos com os custos do nosso app.</Text>
-              <TouchableOpacity
-                style={[styles.button, styles.buttonClose]}
-                onPress={() => setModalVisible(!modalVisible)}
-              >
-              <Text style={styles.textStyle}>Hide Modal</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </View>
-      </Modal>
 
-    {logged == false ?(
-      <TouchableOpacity onPress={openSignUp}>
+      <TouchableOpacity onPress={() => user == null ? navigation.navigate('signUp') : navigation.navigate('profile')}>
         <Image source={require('../assets/user.png')}></Image>
       </TouchableOpacity>
-    ): 
-      <TouchableOpacity onPress={openProfileScreen}>
-        <Image source={require('../assets/user.png')}></Image>
-      </TouchableOpacity>
-    }
         
       <Text style = {styles.title}>Idonate</Text>
-      <TouchableOpacity onPress={() => setModalVisible(true)}>
+      <TouchableOpacity onPress={() => navigation.navigate('config')}>
         <Ionicons name="settings-outline" size={30} color="black" />
       </TouchableOpacity>
         
-      </View>
+    </View>
   )
 }

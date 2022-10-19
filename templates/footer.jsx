@@ -1,8 +1,12 @@
-import { View, TouchableOpacity, Image, StyleSheet } from 'react-native'
+import { View, TouchableOpacity, Image, Text, Modal } from 'react-native'
 import { Ionicons, Feather, MaterialIcons } from '@expo/vector-icons';
 import styles from '../styles/styles'
+import { useState } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export function Footer({ navigation }) {
+  const [modalVisible, setModalVisible] = useState(false);
+
   function openHome() {
     navigation.navigate('home')
   }
@@ -16,7 +20,7 @@ export function Footer({ navigation }) {
   }
 
   function openPayment() {
-    navigation.navigate('payment')
+    navigation.navigate('ong')
   }
 
   function openHistory() {
@@ -25,6 +29,27 @@ export function Footer({ navigation }) {
 
     return (
         <View style = {styles.footer}>
+
+          <Modal
+          animationType="slide"
+          transparent={true}
+          visible={modalVisible}
+          >
+              <View style={styles.centeredView}>
+                <View style={styles.modalView}>
+                  <Text style={styles.modalText}>Efetue seu login antes de continuar navegando pelo feed.</Text>
+                  <TouchableOpacity
+                    style={[styles.button, styles.buttonClose]}
+                    onPress={() => {
+                      setModalVisible(!modalVisible);
+                      props.navigation.navigate('signUp');
+                    }}
+                  >
+                    <Text style={styles.hideText}>Login</Text>
+                  </TouchableOpacity>
+                </View>
+            </View>
+          </Modal>
           <TouchableOpacity onPress={openHome}>
             <Ionicons style = {styles.footerIcon} name="home-outline" size={35} color="black" />
           </TouchableOpacity>
@@ -33,9 +58,12 @@ export function Footer({ navigation }) {
             <Ionicons style = {styles.footerIcon} name="search-outline" size={35} color="black" />
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={openPayment}>
+          
+          <TouchableOpacity onPress={openPayment} style = {{flexDirection: 'column'}}>
             <Image style = {styles.footerLogo} source={require('../assets/logo.png')}></Image>
           </TouchableOpacity>
+          <Text style = {styles.donateText}>Doar</Text>
+         
           
           <TouchableOpacity onPress={openNewPost}>
             <Feather style = {styles.footerIcon} name="plus-square" size={35} color="black" />

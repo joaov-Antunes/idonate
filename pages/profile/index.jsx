@@ -2,10 +2,41 @@ import { Text, View, Image, ScrollView, TouchableOpacity, StyleSheet, Linking} f
 import { Montserrat_400Regular } from '@expo-google-fonts/montserrat';
 import {PlayfairDisplay_400Regular, PlayfairDisplay_700Bold, PlayfairDisplay_600SemiBold, PlayfairDisplay_400Regular_Italic} from '@expo-google-fonts/playfair-display';
 import {useFonts} from 'expo-font';
-import { Footer } from '../templates/footer'
-import { useState } from 'react';
+import { Footer } from '../../templates/footer'
+import { useEffect, useState } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export function Profile(props) {
+    let [user, setUser] = useState(null);
+    let [username, setUsername] = useState(null);
+
+    useEffect(() => {
+        async function getUserData() {
+            let userData = await AsyncStorage.getItem('userData');
+            let userDataParsed = JSON.parse(userData);
+            try {
+                setUser(userDataParsed.name);
+                setUsername(userDataParsed.userName);
+            } catch (error) {
+                console.log(error);
+            };
+            let response = await fetch('http://192.168.0.190/profile', {
+            method: 'GET',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            },
+            });
+            let json = await response.json();
+            if(json == 'error') {
+                alert(`Não foi possível carregar seu perfil. ${json}`);
+            } else {
+                console.log('Perfil carregado com sucesso');
+            }
+        }
+        getUserData();
+    }, [])
+
     let [fontsLoaded] = useFonts({
         Montserrat_400Regular,
         PlayfairDisplay_400Regular,
@@ -27,11 +58,11 @@ export function Profile(props) {
             <View style = {styles.header}>
 
             </View>
-            <Text style = {styles.title}>ONG name</Text>
+            <Text style = {styles.title}>{user}</Text>
             <View style = {{flexDirection: 'row'}}>
-            <View style = {styles.topContent}>
+            <View>
                 <View style = {{flexDirection: 'row'}}>
-                    <Image source={require('../assets/user-big.png')} style = {{marginLeft: 18}}></Image>
+                    <Image source={require('../../assets/user-big.png')} style = {{marginLeft: 18}}></Image>
                     <View>
                         <Text style ={styles.info}>Publicações 10</Text>
                         <Text style ={styles.info}>Nota 5</Text>
@@ -40,13 +71,13 @@ export function Profile(props) {
 
                 <View style = {styles.topFooter}>
                     <View style = {{flexDirection: 'row'}}>
-                        <Text style = {{left: 17, textAlignVertical: 'center', fontSize: 18}}>Nome real</Text>
+                        <Text style = {{left: 17, textAlignVertical: 'center', fontSize: 24, fontWeight: 'bold'}}>{username}</Text>
                         <TouchableOpacity style = {styles.follow}>
                             <Text style = {{color: '#0D6380', fontWeight: 'bold', fontSize: 18}}>Seguir</Text>
                         </TouchableOpacity>
                     </View>
                     <View style = {{flexDirection: 'row', top: 17}}>
-                        <Image source={require('../assets/location.png')} style = {{left: 17}}></Image>
+                        <Image source={require('../../assets/location.png')} style = {{left: 17}}></Image>
                         <Text onPress={() => { 
                             Linking.openURL('https://goo.gl/maps/m5voU2cVVpyaZJUi7');
                             }}
@@ -61,16 +92,16 @@ export function Profile(props) {
                     <View style = {styles.content}>
 
                         <View style = {styles.posts}>
-                            <Image style = {styles.post} source={require('../assets/photo-feed-small.png')}></Image>
-                            <Image style = {styles.post} source={require('../assets/idea.png')}></Image>
-                            <Image style = {styles.post} source={require('../assets/elder.png')}></Image>
-                            <Image style = {styles.post} source={require('../assets/donations.png')}></Image>
+                            <Image style = {styles.post} source={require('../../assets/photo-feed-small.png')}></Image>
+                            <Image style = {styles.post} source={require('../../assets/idea.png')}></Image>
+                            <Image style = {styles.post} source={require('../../assets/elder.png')}></Image>
+                            <Image style = {styles.post} source={require('../../assets/donations.png')}></Image>
                         </View>
                         
                         <View style = {styles.blankArea}>
                             <Text style = {styles.newPost}>Adicione uma nova postagem</Text>
                             <TouchableOpacity style = {{marginTop: 10}} onPress = {openNewPost}>
-                                <Image source={require('../assets/newpost.png')}></Image>
+                                <Image source={require('../../assets/newpost.png')}></Image>
                             </TouchableOpacity>
                         </View>
                         
@@ -110,7 +141,8 @@ const styles = StyleSheet.create({
         width: 116,
         height: 33,
         alignItems: 'center',
-        marginLeft: 180,
+        position: 'absolute',
+        right: 20
     },
     adressLink: {
         color: '#000AFF',

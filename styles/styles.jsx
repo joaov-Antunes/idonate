@@ -71,17 +71,49 @@ const styles = StyleSheet.create({
       marginBottom: 50,
       marginRight: 31
     },
-    modalContainer: {
-      backgroundColor: 'FCFEFF',
-      width: '60%',
-      alignItems: 'center'
+    centeredView: {
+      flex: 1,
+      justifyContent: "center",
+      alignItems: "center",
+      marginTop: 22
+    },
+    modalView: {
+      margin: 20,
+      backgroundColor: "white",
+      borderRadius: 20,
+      padding: 35,
+      alignItems: "center",
+      shadowColor: "#000",
+      shadowOffset: {
+        width: 0,
+        height: 2
+      },
+      shadowOpacity: 0.25,
+      shadowRadius: 4,
+      elevation: 5
     },
     button: {
-      backgroundColor: "#0D6380",
       borderRadius: 10,
+      padding: 10,
+      backgroundColor: '#0D6380',
+      width: 180,
       height: 56,
       alignItems: 'center',
-       justifyContent: 'center',
+      justifyContent: 'center'
+    },
+    modalText: {
+      fontSize: 18,
+      marginBottom: 18
+    },
+    hideText: {
+      fontSize: 18,
+      color: '#fff'
+    },
+    donateText: {
+      position: 'absolute',
+      fontWeight: 'bold',
+      left: 184,
+      bottom: 10
     }
   });
   

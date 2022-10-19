@@ -1,5 +1,10 @@
-const DataTypes = require('sequelize')
-const bd = require('../database/bd')    
+const DataTypes = require('sequelize');
+const bd = require('../database/bd');
+
+/*
+    Modelo da tabela clientes onde são armazenados os dados 
+    de login e cadastro de clientes comuns (que não são ONGs)
+*/
 
 const Cliente = bd.define('Cliente', {
     ClientId: {
@@ -36,6 +41,6 @@ const Cliente = bd.define('Cliente', {
         type: DataTypes.STRING,
         allowNull: false
     }
-})
+});
 
 module.exports = Cliente

@@ -1,17 +1,19 @@
-import { View, TouchableOpacity, Text, StyleSheet } from "react-native";
+import { View, TouchableOpacity, Text, StyleSheet, Image } from "react-native";
 import { Montserrat_400Regular} from '@expo-google-fonts/montserrat';
 import {PlayfairDisplay_400Regular, 
         PlayfairDisplay_700Bold, 
         PlayfairDisplay_600SemiBold,
-        PlayfairDisplay_400Regular_Italic} 
+        PlayfairDisplay_400Regular_Italic}
 from '@expo-google-fonts/playfair-display';
 import {useFonts} from 'expo-font';
-import { Footer } from "../templates/footer";
+import { Footer } from "../../templates/footer";
 import * as ImagePicker from 'expo-image-picker'
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export function NewPost(props) {
     const [image, setImage] = useState(null);
+    const [display, setDisplay] = useState('none');
     
     const pickImage = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
@@ -21,11 +23,13 @@ export function NewPost(props) {
             quality: 1,
         });
 
-        console.log(result);
-
         if (!result.cancelled) {
-            setImage(result.uri)
+            setImage(result.uri);
         }
+    }
+
+    async function storeImageUrl() {
+        await AsyncStorage.setItem('ImageUrl', image);
     }
 
     let [fontsLoaded] = useFonts({
@@ -50,8 +54,13 @@ export function NewPost(props) {
                 <TouchableOpacity onPress={pickImage} style = {styles.selectImage}>
                     <Text style = {styles.subtitle}>Selecionar imagem da galeria</Text>
                 </TouchableOpacity>
+                <Text style = {{color: 'red', display: display}}>Selecione a imagem antes de prosseguir.</Text>
                 {image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
             </View>
+
+            <TouchableOpacity onPress={() => image == null ? setDisplay('flex') : props.navigation.navigate('finish')} style = {styles.selectImage}>
+                    <Text style = {styles.subtitle} onPress = {storeImageUrl}>Continuar</Text>
+                </TouchableOpacity>
             <Footer navigation = {props.navigation}/>
         </View>
     )

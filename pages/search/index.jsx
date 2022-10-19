@@ -1,6 +1,6 @@
 import { View, TextInput, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import {Ionicons} from '@expo/vector-icons';
-import { Footer } from "../templates/footer";
+import { Footer } from "../../templates/footer";
 
 export function Search(props) {
     return(

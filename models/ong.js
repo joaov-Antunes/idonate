@@ -1,5 +1,6 @@
 const DataTypes = require('sequelize');
 const bd = require('../database/bd');
+const Post = require('./post');
 
 const Ong = bd.define('Ong', {
     OngId: {
@@ -24,6 +25,10 @@ const Ong = bd.define('Ong', {
         type: DataTypes.STRING,
         allowNull: false
     },
+    CNDT: {
+        type: DataTypes.BLOB,
+        allowNull: true
+    },
     password: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -31,7 +36,6 @@ const Ong = bd.define('Ong', {
     CellphoneNumber: {
         type: DataTypes.STRING,
         allowNull: false,
-        cndt: DataTypes.BLOB,
         allowNull: false
     },
     description: {
@@ -40,8 +44,7 @@ const Ong = bd.define('Ong', {
     },
     profileImage: {
         type: DataTypes.BLOB,
-        allowNull:true
+        allowNull: true
     }
 });
-
-module.exports = Ong
+module.exports = Ong;

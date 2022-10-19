@@ -1,5 +1,6 @@
-const Sequelize = require('sequelize')
-const bdName = 'Idonate'
+const Sequelize = require('sequelize');
+//Conexão com banco de dados
+const bdName = 'Idonate';
 
 const sequelize = new Sequelize(bdName, 'root', 'Jv410551', {
     host: 'localhost',

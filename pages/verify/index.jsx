@@ -10,7 +10,7 @@ export function VerifyLogin() {
 
   return (
     <View style = {styles.container}>
-      <Image source={require('../assets/logo.png')} style = {{marginBottom: 22}}></Image>
+      <Image source={require('../../assets/logo.png')} style = {{marginBottom: 22}}></Image>
       <Text style = {{fontSize: 10}}>FOI ENVIADO UM CÓDIGO PARA O SEU EMAIL</Text>
       <View style = {{flexDirection: 'row', justifyContent: 'center', marginLeft: -8, marginTop: 32}}>
         <TextInput 

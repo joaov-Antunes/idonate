@@ -1,25 +1,21 @@
-import { View, TouchableOpacity, TextInput, Text, Image, StyleSheet } from "react-native";
-import { Pix } from "./pix";
+import { View, StyleSheet,TouchableOpacity, Text, Image } from "react-native";
 
-export function Payment({ navigation }) {    
-    
-    function selectCard() {
-        navigation.navigate('pix')
-    }
-
-    return (
+export function Pix() {
+    return(
         <View style = {styles.container}>
 
-            <View style = {{flexDirection: 'row', justifyContent: 'center', marginLeft: -22}}>
-                <TouchableOpacity style = {styles.button}>
-                    <Text style = {styles.buttonText}>Cartão</Text>
-                </TouchableOpacity>
+        <Text style = {styles.title}>Escaneie para fazer o pagamento</Text>
+        <Image source={require('../../assets/qr.png')} style = {{alignSelf: 'center', marginTop: 36 }}/>
 
-                <TouchableOpacity style = {styles.button} onPress = {selectCard}>
-                    <Text style = {styles.buttonText}>PIX</Text>
-                </TouchableOpacity>
-            </View>
+        <Text style = {{marginTop: 50, textAlign: 'center', fontSize: 18}}>OU</Text>
+        <Text style = {styles.subTitle}>Copie e cole no aplicativo do seu banco</Text>
+        <View style = {styles.bottomPage}>
+            <Text style = {styles.pixKey}>Chave pix:</Text>
+            <TouchableOpacity style = {styles.pixKeyNumber}>
+                <Text>11989289800</Text>
+            </TouchableOpacity>
         </View>
+    </View>
     )
 }
 
@@ -27,7 +23,8 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         marginTop: 10,
-        justifyContent: 'center'
+        justifyContent: 'center',
+         alignItems: 'center'
     },
     button: {
         width: 130,
@@ -46,9 +43,14 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontWeight: 'bold',
         textAlign: 'center',
-        marginTop: 54,
     },
-     bottomPage: {
+    subTitle: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        textAlign: 'center',
+        marginTop: 54
+    },
+    bottomPage: {
         flexDirection: 'row', 
         justifyContent: 'center',
         marginTop: 50
