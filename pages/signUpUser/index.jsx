@@ -82,10 +82,10 @@ export function SignUpUser({ navigation }) {
         <TextInput style = {styles.input} onChangeText = {text => setEmail(text)}/>
         
         <Text style = {{alignSelf: 'flex-start', marginLeft: 40, marginTop: 18, marginBottom: -20}}>SENHA</Text>
-        <TextInput style = {styles.input} onChangeText = {text => setPassword(text)}/>
+        <TextInput style = {styles.input} onChangeText = {text => setPassword(text)} secureTextEntry={true}/>
 
         <Text style = {{alignSelf: 'flex-start', marginLeft: 40, marginTop: 18, marginBottom: -20}}>CONFIRMAR SENHA</Text>
-        <TextInput style = {styles.input} onChangeText = {text => setConfirmPassword(text)}/>
+        <TextInput style = {styles.input} onChangeText = {text => setConfirmPassword(text)} secureTextEntry={true}/>
         
         <Text style = {{alignSelf: 'flex-start', marginLeft: 40, marginTop: 18, marginBottom: -20}}>NOME DE USUÁRIO</Text>
         <TextInput style = {styles.input} onChangeText = {text => setUsername(text)}/>

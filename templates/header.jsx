@@ -38,7 +38,7 @@ export function Header({navigation}) {
   return (
     <View style = {styles.header}>
 
-      <TouchableOpacity onPress={() => user == null ? navigation.navigate('signUp') : navigation.navigate('profile')}>
+      <TouchableOpacity onPress={() => logged == false ? navigation.navigate('signUp') : navigation.navigate('profile')}>
         <Image source={require('../assets/user.png')}></Image>
       </TouchableOpacity>
         

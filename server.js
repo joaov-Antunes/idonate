@@ -2,25 +2,70 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const bd = require('./database/bd');
-const { Client, Ong, Post } = require('./models');
-
+const { Client, Ong, Post, Chat } = require('./models');
+require("dotenv").config();
+const jwt = require('jsonwebtoken');
 const app = express();
+const SECRET = 'Mysecret';
+
 app.use(cors());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 //Verifica se os dados de login estão corretos de acordo com os existentes no BD, chamada no arquivo "loginUSer.jsx"
 
+function isLogged(req, res, next) {
+    const token = req.headers['x-access-token'];
+    if(!token) return res.status(401).send({ auth: false, message: "There aren't any token" });
+
+    jwt.verify(token, SECRET, (err, decoded) => {
+        if(err) return res.status(500).send({ auth: false, message: 'Failed to authenticate.' });
+
+        req.userId = decoded.id;
+        next();
+    });
+}
+
 app.post('/login', async (req, res) => {
     const response =  await Client.findOne({
         where: {email: req.body.email, password: req.body.password}
+    });
+
+    if(response == null) {
+        res.send(JSON.stringify('error'));
+        res.status(401).end();
+    } else {
+        const token = jwt.sign({id: response.id}, SECRET, {expiresIn: 2628002}); // expires in 1 month
+        res.status(200).send({response, auth: true, token: token});
+        res.send(response);
+    };
+});
+
+app.post('/logout', async(req, res) => {
+    res.status(200).send({ auth: false, token: null });
+})
+
+// app.post('/chat', async(req, res) => {
+//     const create = await Chat.create({
+//         Message: req.body.Message
+//     })
+//     if(create == null) {
+//         res.send(JSON.stringify('error'));
+//     } else {
+//         res.send(create);
+//     }
+// })
+
+app.get('/posts', isLogged, async (req, res) => {
+    let response = await Post.findAll({
+        where: {ImageUrl: req.body.ImageUrl, Caption: req.body.Caption}
     });
     if(response == null) {
         res.send(JSON.stringify('error'));
     } else {
         res.send(response);
     }
-});
+})
 
 app.post('/loginong', async (req, res) => {
     const response = await Ong.findOne({
@@ -28,8 +73,10 @@ app.post('/loginong', async (req, res) => {
     });
     if(response == null) {
         res.send(JSON.stringify('error'));
+        res.status(401).end();
     } else {
-        res.send(response);
+        const token = jwt.sign({id: response.id}, SECRET, {expiresIn: 2628002}); // expires in 1 month
+        res.status(200).send({response, auth: true, token: token});
     }
 });
 
@@ -66,10 +113,11 @@ app.post('/registerong', async(req, res) => {
     }
 });
 
-app.post('/finishpost', async(req, res) => {
-    let response = await Post.create({
+app.post('/finishpost', isLogged, async(req, res) => {
+    const response = await Post.create({
+        ClientId: req.user.id,
         ImageUrl: req.body.ImageUrl,
-        Caption: 'Legenda teste'
+        Caption: req.body.caption,
     });
     if (response == null) {
         res.send(JSON.stringify('error'));
@@ -78,11 +126,10 @@ app.post('/finishpost', async(req, res) => {
     };
 });
 
-app.get('/profile', async(req, res) => {
+app.get('/profile', isLogged, async(req, res) => {
     const response =  await Client.findOne({
         where: {email: req.body.email, password: req.body.password}
     });
-
     if(response == null) {
         res.send(JSON.stringify('error'));
     } else {
@@ -90,36 +137,20 @@ app.get('/profile', async(req, res) => {
     };
 });
 
-app.get('/islogged', async(req, res) => {
-    let response =  await Client.findOne({
-        where: {email: req.body.email, password: req.body.password}
-    });
-
-    if(response == null) {
+app.post('/search', async(req, res) => {
+    const response = await Ong.findAll({
+        where: {OngName: req.body.OngName}
+    })
+    if(response === null) {
         res.send(JSON.stringify('error'));
     } else {
         res.send(response);
     };
-});
+})
 
 app.get ('/', (req, res) => {
     res.send('Meu servidor backend já está rodando.');
 });
-
-//Teste para veerificar se as querys estam funcionando e armazenando os dados no bd.
-
-// app.get('/create', async(req, res) => {
-//     let create = await Client.create({
-//         name: 'João',
-//         cpf: 12345678910,
-//         email: 'joaovicente399544@gmail.com',
-//         password: 'SenhaTeste123',
-//         age: 17,
-//         cellphoneNumber: 11123567890,
-//         userName: 'BGD'
-//     });
-//     res.send('usuário criado com sucesso!')
-// });
 
 //Calls the authentication
 async function bdConnect() {

@@ -3,7 +3,6 @@ import { View, Image, Text, StyleSheet, TouchableOpacity, TextInput, Alert } fro
 import * as Facebook from 'expo-facebook';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-
 export function LoginUser({ navigation }) {
   const [display, setDisplay] = useState('none')
   const [user, setUser] = useState(null);
@@ -29,11 +28,10 @@ export function LoginUser({ navigation }) {
       setDisplay('flex');
       setTimeout(() => {
         setDisplay('none')
-      }, 10000)
+      }, 10000);
     } else {
       navigation.navigate('profile');
       setLogin(true);
-
       const userJsonValue = JSON.stringify(json);
       await AsyncStorage.setItem('userData', userJsonValue);
       let resData = await AsyncStorage.getItem('userData');
@@ -43,6 +41,7 @@ export function LoginUser({ navigation }) {
 
   return (
       <View style = {styles.container}>
+        
         <Image source={require('../../assets/logo.png')}></Image>
         <Text style = {{display: display, color: 'red', fontSize: 18, margin: 20}}>Usuário ou senha inválidos.</Text>
         <Text style = {{alignSelf: 'flex-start', marginLeft: 40, marginTop: 18, marginBottom: -20 }}>EMAIL</Text>
@@ -53,16 +52,6 @@ export function LoginUser({ navigation }) {
         <TouchableOpacity style = {styles.login} onPress = {sendLogin}>
           <Text style = {{color: '#FFF', fontSize: 24}}>LOGIN</Text>
         </TouchableOpacity> 
-
-        <Text style = {{fontSize: 18, margin: 32}}>OU</Text>
-
-        <TouchableOpacity style = {styles.alternativeLogin}>
-          <Image source={require('../../assets/fb.png')}/>
-        </TouchableOpacity>
-        
-        <TouchableOpacity style = {styles.alternativeLogin}>
-          <Image source={require('../../assets/google.png')}/>
-        </TouchableOpacity>
 
       </View>
     )

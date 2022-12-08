@@ -1,17 +1,45 @@
 import { View, TextInput, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import {Ionicons} from '@expo/vector-icons';
 import { Footer } from "../../templates/footer";
+import { useState } from "react";
 
 export function Search(props) {
+    const [user, setUser] = useState(null);
+    const [text, setText] = useState('')
+
+    async function search() {
+        let response = await fetch('http:/192.168.0.190:3000/search', {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: {
+                OngName: user,
+            }
+        });
+        let json = await response.json();
+        if(json == 'error') {
+            setText('ONG não encontrada');
+        } else {
+            setText(json);
+        }
+    }
+
     return(
         <View style = {styles.container}>
             <View style = {styles.header}>
-                <TextInput 
+                <TextInput
+                onChangeText={text => {
+                    search
+                    setUser(text);
+                }}
                 placeholder= 'Buscar perfis e hashtags'
                 style = {styles.input}
                 />
                 <Ionicons style = {styles.icon} name="search-outline" size={35} color="black" />
             </View>
+            <Text>{text}</Text>
             <Footer navigation= {props.navigation}/>
         </View>
     )

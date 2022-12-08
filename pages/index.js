@@ -19,6 +19,8 @@ import  { Card }  from "./card";
 import { Appearance } from "./appearance";
 import { Ong } from "./ong";
 import { FinishPost } from "./newPost/finish";
+import { Chat } from "./chat";
+import { ChooseDonation } from "./chooseDonate";
 
 export { Home, 
         Login, 
@@ -40,5 +42,7 @@ export { Home,
         Card,
         Appearance,
         Ong,
-        FinishPost
+        FinishPost,
+        Chat,
+        ChooseDonation
     }

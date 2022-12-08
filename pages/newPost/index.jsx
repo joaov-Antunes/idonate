@@ -55,12 +55,14 @@ export function NewPost(props) {
                     <Text style = {styles.subtitle}>Selecionar imagem da galeria</Text>
                 </TouchableOpacity>
                 <Text style = {{color: 'red', display: display}}>Selecione a imagem antes de prosseguir.</Text>
-                {image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
             </View>
 
             <TouchableOpacity onPress={() => image == null ? setDisplay('flex') : props.navigation.navigate('finish')} style = {styles.selectImage}>
-                    <Text style = {styles.subtitle} onPress = {storeImageUrl}>Continuar</Text>
-                </TouchableOpacity>
+                <Text style = {styles.subtitle} onPress = {storeImageUrl}>Continuar</Text>
+            </TouchableOpacity>
+
+            <Text style = {styles.message}>A imagem aparecerá aqui</Text>
+            {image && <Image source={{ uri: image }} style={{ width: 200, height: 200, alignSelf: 'center'}} />}
             <Footer navigation = {props.navigation}/>
         </View>
     )
@@ -94,8 +96,14 @@ const styles = StyleSheet.create({
         backgroundColor: '#0D6380',
         marginTop: 64,
         height: 56,
+        alignSelf: 'center',
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 10,
+    },
+    message: {
+        fontSize: 24,
+        textAlign: 'center',
+        marginTop: 52
     }
-})
+});

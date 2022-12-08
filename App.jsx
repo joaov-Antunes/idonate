@@ -1,5 +1,6 @@
 import {Routes} from "./routes";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Appearance, useColorScheme } from 'react-native'
 
 export default function App() {
 

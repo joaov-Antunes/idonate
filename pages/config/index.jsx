@@ -1,10 +1,19 @@
-import { View, TouchableOpacity, Text, StyleSheet, Image } from "react-native";
+import { View, TouchableOpacity, Text, StyleSheet, Image, useColorScheme } from "react-native";
 import { useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { MaterialIcons } from '@expo/vector-icons'; 
 
 export function Config({navigation}) {
     const [user, setUser] = useState(null);
+    function MyComponent() {
+        let colorScheme = useColorScheme();
+      
+        if (colorScheme === 'dark') {
+          // render some dark thing
+        } else {
+          // render some light thing
+        }
+      }
 
     async function getUserData() {
         let response = await AsyncStorage.getItem('userData')
@@ -25,6 +34,7 @@ export function Config({navigation}) {
     async function logout() {
         try {
             await AsyncStorage.removeItem('userData');
+            await AsyncStorage.removeItem('ongData');
             navigation.navigate('home');
           } catch(e) {
             // remove error

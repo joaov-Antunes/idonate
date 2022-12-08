@@ -3,7 +3,7 @@ import { View, Image, Text, StyleSheet, TouchableOpacity, TextInput } from "reac
 export function VerifyLogin() {
 
   async function verify() {
-    let response = await fetch('http://192.168.0.190:3000/verify', {
+    let response = await fetch('http://172.16.0.66:3000/verify', {
       
     })
   }

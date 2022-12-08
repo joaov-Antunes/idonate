@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { View, Image, Text, StyleSheet, TouchableOpacity, TextInput } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import Icon from 'react-native-vector-icons/FontAwesome';
-
 
 export function LoginOng({ navigation }) {
   const [email, setemail] = useState(null);
@@ -20,12 +20,21 @@ export function LoginOng({ navigation }) {
         password: password
       })
     });
-    let json = await response.json()
+    let json = await response.json();
+    let token = json.token
+    console.log(json);
     if(json == 'error') {
       setDisplay('flex');
       setTimeout(() => setDisplay('none'), 5000)
     } else {
-      navigation.navigate('verify');
+      navigation.navigate('profile');
+      try {
+        await AsyncStorage.setItem('ongData', JSON.stringify({json, token}));
+        const data = await AsyncStorage.getItem('ongData');
+        console.log(data);
+      } catch(error) {
+        console.error(error);
+      }
     }
   }
 

@@ -10,30 +10,18 @@ export function Profile(props) {
     let [user, setUser] = useState(null);
     let [username, setUsername] = useState(null);
 
+    async function getUserData() {
+        let userData = await AsyncStorage.getItem('userData');
+        let userDataParsed = JSON.parse(userData);
+        try {
+            setUser(userDataParsed.name);
+            setUsername(userDataParsed.userName);
+        } catch (error) {
+            console.log(error);
+        };
+    }
+
     useEffect(() => {
-        async function getUserData() {
-            let userData = await AsyncStorage.getItem('userData');
-            let userDataParsed = JSON.parse(userData);
-            try {
-                setUser(userDataParsed.name);
-                setUsername(userDataParsed.userName);
-            } catch (error) {
-                console.log(error);
-            };
-            let response = await fetch('http://192.168.0.190/profile', {
-            method: 'GET',
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json'
-            },
-            });
-            let json = await response.json();
-            if(json == 'error') {
-                alert(`Não foi possível carregar seu perfil. ${json}`);
-            } else {
-                console.log('Perfil carregado com sucesso');
-            }
-        }
         getUserData();
     }, [])
 
@@ -78,13 +66,16 @@ export function Profile(props) {
                     </View>
                     <View style = {{flexDirection: 'row', top: 17}}>
                         <Image source={require('../../assets/location.png')} style = {{left: 17}}></Image>
-                        <Text onPress={() => { 
-                            Linking.openURL('https://goo.gl/maps/m5voU2cVVpyaZJUi7');
-                            }}
-                            style = {styles.adressLink}
-                            >
-                            Praça Miguel Ortega, 135 - Taboão da Serra.
-                        </Text>
+                        <TouchableOpacity onPress={() => { 
+                                Linking.openURL('https://goo.gl/maps/m5voU2cVVpyaZJUi7');
+                                }}>
+                            <Text
+                                style = {styles.adressLink}
+                                >
+                                Praça Miguel Ortega, 135 - Taboão da Serra.
+                            </Text>
+                        </TouchableOpacity>
+                        
                     </View>
                 </View>
 

@@ -2,7 +2,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 const { Screen, Navigator } = createNativeStackNavigator();
 
-import { Home, Login, LoginOng, LoginUser, Profile, VerifyLogin, Search, NewPost, SignUp, SignUpOng, ChooseSignUp, SignUpOngPartTwo, Payment, Pix, History, SignUpUser, Config, Card, Appearance, Ong, FinishPost} from '../pages'
+import { Home, Login, LoginOng, LoginUser, Profile, VerifyLogin, Search, NewPost, SignUp, SignUpOng, ChooseSignUp, SignUpOngPartTwo, Payment, Pix, History, SignUpUser, Config, Card, Appearance, Ong, FinishPost, Chat, ChooseDonation} from '../pages'
 
 export function AppRoutes() {
     return (
@@ -171,9 +171,25 @@ export function AppRoutes() {
             <Screen
                 name='finish'
                 options = {{
-                    headerShown: true
+                    headerShown: false
                 }}
                 component = {FinishPost}
+            />
+
+            <Screen
+                name='chat'
+                options = {{
+                    headerShown: false
+                }}
+                component = {Chat}
+            />
+
+            <Screen
+                name='choose'
+                options = {{
+                    headerShown: false
+                }}
+                component = {ChooseDonation}
             />
         </Navigator>
     )
